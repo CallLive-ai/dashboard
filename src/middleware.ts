@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const authRoutes = ["/auth/login", "/auth/signup", "/auth/callback"];
+  const authRoutes = ["/auth/login", "/auth/signup", "/auth/callback", "/auth/forgot_password", "/auth/reset-password"];
   const currentPath = req.nextUrl.pathname;
   const isAuthRoute = authRoutes.some((route) =>
     currentPath.startsWith(route)

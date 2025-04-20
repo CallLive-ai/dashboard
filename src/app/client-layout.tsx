@@ -11,15 +11,15 @@ const noSidebarRoutes = [
   '/auth/login',
   '/auth/signup',
   '/auth/callback',
-  // '/forgot-password',
-  // '/admin/login',
+  '/auth/forgot_password',
+  '/auth/reset-password',
 ];
 
 export default function ClientLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) {  
   const pathname = usePathname();
   const hideSidebar = noSidebarRoutes.includes(pathname);
 

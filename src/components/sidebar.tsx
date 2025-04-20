@@ -24,6 +24,10 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+import useOrgSettingsPath from "../app/hooks/use-org_setting";
+import useAccountSettingsPath from "../app/hooks/use-account_setting";
+import { useMemo } from "react";
+
 interface NavItemProps {
   href: string;
   icon: React.ReactNode;
@@ -106,6 +110,8 @@ export function Sidebar() {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
   const logout = useLogout();
+  const orgSettingsPath = useOrgSettingsPath();
+  const AccountSettingsPath = useAccountSettingsPath();
 
   const toggleSection = (section: string) => {
     setExpandedSection(expandedSection === section ? null : section);
@@ -227,21 +233,25 @@ export function Sidebar() {
         </SidebarSection>
 
         <SidebarSection title="ORG SETTINGS">
-          <NavItem
-            href="/org-settings"
-            icon={<Settings size={18} />}
-            label="Org Settings"
-            isActive={pathname === '/org-settings'}
-          />
+          {orgSettingsPath && (
+            <NavItem
+              href={orgSettingsPath}
+              icon={<Settings size={18} />}
+              label="Org Settings"
+              isActive={pathname.startsWith('/org-settings')}
+            />
+          )}
         </SidebarSection>
 
         <SidebarSection title="ACCOUNT SETTINGS">
+          {AccountSettingsPath && (
           <NavItem
-            href="/account-settings"
+            href={AccountSettingsPath}
             icon={<Settings size={18} />}
             label="Account Settings"
-            isActive={pathname === '/account-settings'}
+            isActive={pathname.startsWith('/account-settings')}
           />
+          )}
         </SidebarSection>
       </div>
 
